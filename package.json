@@ -1,0 +1,19 @@
+{
+  "name": "purgatory",
+  "version": "0.0.1",
+  "description": "A mod for The Binding of Isaac: Repentance",
+  "keywords": [
+    "isaac",
+    "mod",
+    "rebirth",
+    "afterbirth",
+    "repentance"
+  ],
+  "license": "GPL-3.0",
+  "dependencies": {
+    "isaac-typescript-definitions": "^1.0.392",
+    "isaacscript": "^1.2.37",
+    "isaacscript-common": "^1.2.275",
+    "isaacscript-lint": "^1.0.99"
+  }
+}
