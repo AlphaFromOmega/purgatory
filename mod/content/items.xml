@@ -1,0 +1,59 @@
+<items gfxroot="gfx/items/" version="1">
+  <passive
+    name="Sprinkler Head"
+    cache="firedelay"
+    description="Tears Up + Spinning Sorrow"
+    gfx="sprinkler_head.png"
+    quality="3"
+  />
+  <passive
+    name="Memory Leak"
+    description="IsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHisIsaacAndHis"
+    gfx="memory_leak.png"
+    quality="2"
+  />
+  <passive
+    name="Superbia"
+    description="Pride in Perfection"
+    gfx="superbia.png"
+    quality="3"
+  />
+  <passive
+    name="Invidia"
+    description="Kleptomaniac"
+    gfx="invidia.png"
+    quality="2"
+  />
+  <passive
+    name="Ira"
+    description="Blind Rage"
+    gfx="ira.png"
+    quality="2"
+  />
+  <passive
+    name="Acedia"
+    cache="speed"
+    description="Rooted"
+    gfx="acedia.png"
+    quality="3"
+  />
+  <passive
+    name="Avaritia"
+    description="Greed is Good"
+    gfx="avaritia.png"
+    quality="3"
+  />
+  <passive
+    name="Gula"
+    description="Devour"
+    gfx="gula.png"
+    quality="3"
+  />
+  <passive
+    name="Luxuria"
+    description="Endear the Enemy"
+    cache="tearflag"
+    gfx="luxuria.png"
+    quality="3"
+  />
+</items>
