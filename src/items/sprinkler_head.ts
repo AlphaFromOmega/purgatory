@@ -1,20 +1,22 @@
-import { CacheFlag, EntityType, LaserVariant } from "isaac-typescript-definitions";
+import { CacheFlag, CollectibleType, EntityType} from "isaac-typescript-definitions";
+import { FamiliarVariant, LaserVariant } from "isaac-typescript-definitions/dist/enums/collections/variants";
+import { getFamiliars } from "isaacscript-common";
 
 let rotateAmount = 0;
 
 let shotCooldown = 0;
 
-export function tearInitSprinklerHead(tear : EntityTear): void
+export function tearInit(tear : EntityTear): void
 {
     if (tear.SpawnerType === EntityType.PLAYER)
     {
         const player = tear.SpawnerEntity?.ToPlayer();
-        if (player !== undefined && player.HasCollectible(CollectibleTypePurgatory.SPRINKLER_HEAD) && (tear.Position.sub(player.Position).Length() < 16))
+        if (player !== undefined && player.FireDelay >= player.MaxFireDelay - 0.5 && player.HasCollectible(CollectibleTypePurgatory.SPRINKLER_HEAD))
         {
             if (shotCooldown <= 0)
             {
                 rotateAmount = (rotateAmount + 1) % 8;
-                shotCooldown = 1;
+                shotCooldown = player.FireDelay - 0.5;
             }
             const nVel = tear.Velocity;
             const nDir = player.GetShootingInput();
@@ -24,14 +26,27 @@ export function tearInitSprinklerHead(tear : EntityTear): void
             const angleOffset = nVel.GetAngleDegrees() - nDir.GetAngleDegrees();
 
             tear.Velocity = Vector(player.ShotSpeed * 8, 0).Rotated((rotateAmount * 45) + angleOffset);
+            if (player.HasCollectible(CollectibleType.GUILLOTINE))
+            {
+                getFamiliars(FamiliarVariant.GUILLOTINE).forEach(f => {
+                    if (f.Player.Index === player.Index)
+                    {
+                        tear.Position = f.Position;
+                    }
+                })
+            }
+            else
+            {
+                tear.Position = player.Position;
+            }
         }
     }
 }
 
-export function laserInitSprinklerHead(laser : EntityLaser): void
+export function laserInit(laser : EntityLaser): void
 {
     const p = laser.SpawnerEntity?.ToPlayer();
-    if (p !== undefined && p.HasCollectible(CollectibleTypePurgatory.SPRINKLER_HEAD) && (laser.Position.sub(p.Position).Length() < 16) && laser.Variant !== LaserVariant.ELECTRIC)
+    if (p !== undefined && p.HasCollectible(CollectibleTypePurgatory.SPRINKLER_HEAD) && (laser.Position.sub(p.Position).Length() < 32) && laser.Variant !== LaserVariant.ELECTRIC)
     {
         if (shotCooldown <= 0)
         {
@@ -59,7 +74,7 @@ export function laserInitSprinklerHead(laser : EntityLaser): void
     }
 }
 
-export function cacheSprinklerHead(player : EntityPlayer, flag : CacheFlag): void
+export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
 {
     if (player.HasCollectible(CollectibleTypePurgatory.SPRINKLER_HEAD))
     {
@@ -69,7 +84,7 @@ export function cacheSprinklerHead(player : EntityPlayer, flag : CacheFlag): voi
         }
     }
 }
-export function updateSprinklerHead(): void
+export function update(): void
 {
     shotCooldown = math.max(shotCooldown - 1, 0);
 }

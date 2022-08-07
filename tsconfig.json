@@ -2,6 +2,7 @@
 {
   // We extend the standard IsaacScript config
   // https://github.com/IsaacScript/isaacscript-tsconfig/blob/main/tsconfig.mod.json
+  "$schema": "https://raw.githubusercontent.com/IsaacScript/isaacscript/main/packages/isaacscript-cli/schemas/tsconfig-isaacscript-schema.json",
   "extends": "isaacscript-tsconfig/tsconfig.mod.json",
 
   // https://www.typescriptlang.org/docs/handbook/compiler-options.html
@@ -26,5 +27,24 @@
       // exact line of the mod that is causing the crash
       // { "name": "./plugins/addCrashDebugStatements.ts" },
     ]
-  }
+  },
+
+  "isaacscript": {
+    // A list of objects that represent the custom stages that are in your mod, if any. See:
+    // https://isaacscript.github.io/main/custom-stages
+    "customStages": [
+      {
+        "name": "Limbo",
+        "xmlPath": "./stages/limbo.xml",
+        "roomVariantPrefix": 791,
+        "backdropPNGPaths": {
+          "walls": ["./mod/resources/gfx/backdrop/791_limbo_wall0.png", "./mod/resources/gfx/backdrop/791_limbo_wall1.png", "./mod/resources/gfx/backdrop/791_limbo_wall2.png", "./mod/resources/gfx/backdrop/791_limbo_wall3.png"],
+          "corners": ["./mod/resources/gfx/backdrop/791_limbo_corner0.png"],
+          "nFloors": ["./mod/resources/gfx/backdrop/791_limbo_nfloor.png"],
+          "lFloors": ["./mod/resources/gfx/backdrop/791_limbo_lfloor.png"],
+        },
+        "rocksPNGPath": "./mod/resources/gfx/grid/rocks_limbo.png"
+      },
+    ],
+  },
 }

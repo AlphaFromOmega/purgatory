@@ -1,19 +1,25 @@
-import { CacheFlag } from "isaac-typescript-definitions";
-import { cacheAcedia } from "../items/acedia";
-import { cacheAvaritia } from "../items/avaritia";
-import { cacheGula } from "../items/gula";
-import { cacheInvidia } from "../items/invidia";
-import { cacheIra } from "../items/ira";
-import { cacheSprinklerHead } from "../items/sprinkler_head";
-import { cacheSuperbia } from "../items/superbia";
+import { CacheFlag, ModCallback } from "isaac-typescript-definitions";
+import { ModUpgraded } from "isaacscript-common";
 
-export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
+import * as acedia from "../items/acedia";
+import * as avaritia from "../items/avaritia";
+import * as gula from "../items/gula";
+import * as invidia from "../items/invidia";
+import * as ira from "../items/ira";
+import * as sprinklerHead from "../items/sprinkler_head";
+import * as superbia from "../items/superbia";
+
+export function init(mod : ModUpgraded): void {
+    mod.AddCallback(ModCallback.EVALUATE_CACHE, main);
+}
+
+export function main(player : EntityPlayer, flag : CacheFlag): void
 {
-    cacheSuperbia(player, flag);
-    cacheInvidia(player, flag);
-    cacheIra(player, flag);
-    cacheAcedia(player, flag);
-    cacheAvaritia(player, flag);
-    cacheGula(player, flag)
-    cacheSprinklerHead(player, flag)
+    superbia.evaluateCache(player, flag);
+    invidia.evaluateCache(player, flag);
+    ira.evaluateCache(player, flag);
+    acedia.evaluateCache(player, flag);
+    avaritia.evaluateCache(player, flag);
+    gula.evaluateCache(player, flag)
+    sprinklerHead.evaluateCache(player, flag)
 }

@@ -9,7 +9,7 @@ const gulaModifierSpeed = [0, 0, 0, 0, 0, 0, 0, 0];
 const gulaModifierRange = [0, 0, 0, 0, 0, 0, 0, 0];
 const gulaModifierLuck = [0, 0, 0, 0, 0, 0, 0, 0];
 
-export function restartGula(): void
+export function restart(): void
 {
     for (const player of getPlayers()) {
         const index = getPlayers().findIndex(p => p.Index === player.Index);
@@ -27,7 +27,7 @@ export function restartGula(): void
     }
 }
 
-export function pickupGula(pickup : EntityPickup, collider : Entity) : void
+export function pickup(pickup : EntityPickup, collider : Entity) : void
 {
     const colliderPlayer: EntityPlayer | undefined = collider.ToPlayer();
     if (colliderPlayer !== undefined)
@@ -368,7 +368,7 @@ export function pickupGula(pickup : EntityPickup, collider : Entity) : void
 
 }
 
-export function updateGula(): void
+export function update(): void
 {
     getPlayers().forEach(player => {
         if (player.HasCollectible(CollectibleTypePurgatory.GULA))
@@ -421,7 +421,7 @@ function rollStats(player : EntityPlayer)
 }
 
 
-export function cacheGula(player : EntityPlayer, flag : CacheFlag): void
+export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
 {
     if (player.HasCollectible(CollectibleTypePurgatory.GULA))
     {

@@ -1,17 +1,20 @@
-import { ModCallback } from "isaac-typescript-definitions";
-import { evaluateCache } from "./callbacks/evaluateCache";
-import { fireTear } from "./callbacks/fireTear";
-import { laserInit } from "./callbacks/laserInit";
-import { postDamage } from "./callbacks/postDamage";
-import { postGameEnd } from "./callbacks/postGameStarted";
-import { postInitPickup } from "./callbacks/postInitPickup";
-import { postRoomEnter } from "./callbacks/postRoomEnter";
-import { postUpdate } from "./callbacks/postUpdate";
-import { preCollidePickup } from "./callbacks/preCollidePickup";
-import { preRoomReward } from "./callbacks/preRoomReward";
-import { tearInit } from "./callbacks/tearInit";
+import { Keyboard, ModCallback } from "isaac-typescript-definitions";
+import { ModCallbackCustom, registerHotkey, reloadRoom, setCustomStage, upgradeMod } from "isaacscript-common";
+import * as evaluateCache from "./callbacks/evaluateCache";
+import * as laserInit  from "./callbacks/laserInit";
+import * as postDamage  from "./callbacks/postDamage";
+import * as postGameStarted  from "./callbacks/postGameStarted";
+import * as postInitPickup  from "./callbacks/postInitPickup";
+import * as postNewLevel  from "./callbacks/postNewLevel";
+import * as postRoomEnter  from "./callbacks/postRoomEnter";
+import * as postUpdate  from "./callbacks/postUpdate";
+import * as preCollidePickup  from "./callbacks/preCollidePickup";
+import * as postNpcSpawn  from "./callbacks/postNpcSpawn";
+import * as preRoomReward  from "./callbacks/preRoomReward";
+import * as tearInit  from "./callbacks/tearInit";
+import * as postPickupSpawn  from "./callbacks/postPickupSpawn";
 import { eid } from "./eid";
-import { stageAPI } from "./stageapi";
+import { purgatoryDataInit } from "./dataManager";
 
 const MOD_NAME = "Purgatory";
 
@@ -19,46 +22,33 @@ export function main(): void {
     // Instantiate a new mod object, which grants the ability to add callback functions that
     // correspond to in-game events.
     const mod = RegisterMod(MOD_NAME, 1);
+    const umod = upgradeMod(mod);
+    purgatoryDataInit();
 
-    mod.AddCallback(ModCallback.ENTITY_TAKE_DMG, postDamage); // Set a callback function that corresponds to when an entity (Player or Enemy) takes damage
-    mod.AddCallback(ModCallback.POST_UPDATE, postUpdate); // Set a callback function that corresponds to after the update cycle
+    evaluateCache.init(umod);
+    laserInit.init(umod);
+    postDamage.init(umod);
+    postGameStarted.init(umod);
+    postInitPickup.init(umod);
+    postNewLevel.init(umod);
+    postRoomEnter.init(umod);
+    postUpdate.init(umod);
+    preCollidePickup.init(umod);
+    postNpcSpawn.init(umod);
+    preRoomReward.init(umod);
+    tearInit.init(umod);
+    postPickupSpawn.init(umod);
 
-    mod.AddCallback(ModCallback.PRE_SPAWN_CLEAN_AWARD, preRoomReward); // Set a callback function that corresponds to when a new run is started
-    mod.AddCallback(ModCallback.POST_GAME_STARTED, postGameEnd); // Set a callback function that corresponds to when a new run is started
-
-    mod.AddCallback(ModCallback.POST_NEW_ROOM, postRoomEnter); // Set a callback function that corresponds to when a new run is started
-
-    mod.AddCallback(ModCallback.EVALUATE_CACHE, evaluateCache); // Set a callback function that corresponds to when a new run is started
-
-    mod.AddCallback(ModCallback.PRE_PICKUP_COLLISION, preCollidePickup); // Set a callback function that corresponds to when a new run is started
-    mod.AddCallback(ModCallback.POST_PICKUP_INIT, postInitPickup); // Set a callback function that corresponds to when a new run is started
-
-    mod.AddCallback(ModCallback.POST_GAME_STARTED, postGameStarted); // Set a callback function that corresponds to when a new run is started
-
-    mod.AddCallback(ModCallback.POST_FIRE_TEAR, fireTear); // Set a callback function that corresponds to when a new run is started
-
-    mod.AddCallback(ModCallback.POST_TEAR_INIT, tearInit); // Set a callback function that corresponds to when a new run is started
-    mod.AddCallback(ModCallback.POST_LASER_INIT, laserInit); // Set a callback function that corresponds to when a new run is started
 
     Isaac.DebugString(`${MOD_NAME} initialized.`);
+    registerHotkey(Keyboard.F5, () => {
+        setCustomStage("Limbo");
+        reloadRoom();
+    });
 }
 
 // Check for EID and then run all stuff that requires EID.
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 if (EID !== null) {
     eid()
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-if (StageAPI !== null)
-{
-    stageAPI()
-}
-else
-{
-    // Warn
-}
-
-function postGameStarted() {
-    Isaac.DebugString("Callback triggered: MC_POST_GAME_STARTED");
 }

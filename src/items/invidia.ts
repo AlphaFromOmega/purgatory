@@ -1,4 +1,5 @@
-import { CacheFlag, EntityType, PickupPrice, PickupVariant, RoomType } from "isaac-typescript-definitions";
+import { CacheFlag, EntityType, PickupPrice, RoomType } from "isaac-typescript-definitions";
+import { PickupVariant } from "isaac-typescript-definitions/dist/enums/collections/variants";
 import { getPlayers, getRandomFloat, getRandomInt } from "isaacscript-common";
 import "../enum/CollectibleTypePurgatory";
 
@@ -9,7 +10,7 @@ const invidiaModifierSpeed = [0, 0, 0, 0, 0, 0, 0, 0];
 const invidiaModifierRange = [0, 0, 0, 0, 0, 0, 0, 0];
 const invidiaModifierLuck = [0, 0, 0, 0, 0, 0, 0, 0];
 
-export function restartInvidia(): void
+export function restart(): void
 {
     for (const player of getPlayers()) {
         const index = getPlayers().findIndex(p => p.Index === player.Index);
@@ -27,7 +28,7 @@ export function restartInvidia(): void
     }
 }
 
-export function newRoomInvidia() : void
+export function newRoom() : void
 {
     getPlayers().forEach(player => {
         if (player.HasCollectible(CollectibleTypePurgatory.INVIDIA))
@@ -53,12 +54,12 @@ export function newRoomInvidia() : void
     });
 }
 
-export function pickupInvidia(pickup : EntityPickup, collider : Entity) : void
+export function pickup(pickup : EntityPickup, collider : Entity) : void
 {
     const colliderPlayer: EntityPlayer | undefined = collider.ToPlayer();
     if (colliderPlayer !== undefined)
     {
-        if (colliderPlayer.HasCollectible(CollectibleTypePurgatory.INVIDIA) && pickup.Variant === PickupVariant.COLLECTIBLE && colliderPlayer.QueuedItem.Item === undefined && colliderPlayer.CanPickupItem())
+        if (colliderPlayer.HasCollectible(CollectibleTypePurgatory.INVIDIA) && pickup.Variant === PickupVariant.COLLECTIBLE && colliderPlayer.IsItemQueueEmpty() && colliderPlayer.CanPickupItem())
         {
             const index = getPlayers().findIndex(p => p.Index === colliderPlayer.Index);
 
@@ -91,7 +92,7 @@ export function pickupInvidia(pickup : EntityPickup, collider : Entity) : void
 
 }
 
-export function cacheInvidia(player : EntityPlayer, flag : CacheFlag): void
+export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
 {
     if (player.HasCollectible(CollectibleTypePurgatory.INVIDIA))
     {
@@ -119,7 +120,7 @@ export function cacheInvidia(player : EntityPlayer, flag : CacheFlag): void
     }
 }
 
-export function initPickupInvidia(entity : EntityPickup): void
+export function initPickup(entity : EntityPickup): void
 {
     getPlayers().forEach(player => {
         if (player.HasCollectible(CollectibleTypePurgatory.INVIDIA))

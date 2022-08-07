@@ -1,15 +1,21 @@
-import { DamageFlag } from "isaac-typescript-definitions";
-import { damageIra } from "../items/ira";
-import { damageSuperbia } from "../items/superbia";
-import { damageLuxuria } from "../items/luxuria";
+import { DamageFlag, ModCallback } from "isaac-typescript-definitions";
+import { ModUpgraded } from "isaacscript-common";
 
-export function postDamage(entity : Entity, damage : float, flags : BitFlags<DamageFlag>, source : EntityRef, countdown : int): boolean
+import * as ira from "../items/ira";
+import * as superbia from "../items/superbia";
+import * as luxuria from "../items/luxuria";
+
+export function init(mod : ModUpgraded): void {
+    mod.AddCallback(ModCallback.ENTITY_TAKE_DMG, main);
+}
+
+export function main(entity : Entity, damage : float, flags : BitFlags<DamageFlag>, source : EntityRef, countdown : int): boolean
 {
-    damageSuperbia(entity, flags);
-    damageIra(entity);
+    superbia.entityTakeDamage(entity, flags);
+    ira.entityTakeDamage(entity);
 
     let canDamage = true;
 
-    canDamage = damageLuxuria(entity, source, damage, flags, countdown);
+    canDamage = luxuria.entityTakeDamage(entity, source, damage, flags, countdown);
     return canDamage;
 }

@@ -2,6 +2,8 @@
 const CollectibleTypePurgatory = {
   SPRINKLER_HEAD : Isaac.GetItemIdByName("Sprinkler Head"),
   MEMORY_LEAK : Isaac.GetItemIdByName("Memory Leak"),
+  TISSUE_BOX : Isaac.GetItemIdByName("Tissue Box"),
+  WAKE_ME_UP : Isaac.GetItemIdByName("Wake Me Up"),
   SUPERBIA : Isaac.GetItemIdByName("Superbia"),
   INVIDIA : Isaac.GetItemIdByName("Invidia"),
   IRA : Isaac.GetItemIdByName("Ira"),

@@ -1,10 +1,16 @@
-import { newRoomAcedia } from "../items/acedia";
-import { newRoomInvidia } from "../items/invidia";
-import { newRoomSuperbia } from "../items/superbia";
+import { ModCallback } from "isaac-typescript-definitions";
+import { ModUpgraded } from "isaacscript-common";
+import * as acedia from "../items/acedia";
+import * as invidia from "../items/invidia";
+import * as superbia from "../items/superbia";
 
-export function postRoomEnter(): void
+export function init(mod : ModUpgraded): void {
+    mod.AddCallback(ModCallback.POST_NEW_ROOM, main);
+}
+
+export function main(): void
 {
-    newRoomSuperbia();
-    newRoomInvidia();
-    newRoomAcedia();
+    superbia.newRoom();
+    invidia.newRoom();
+    acedia.newRoom();
 }

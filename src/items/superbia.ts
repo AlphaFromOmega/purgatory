@@ -5,7 +5,7 @@ import "../enum/CollectibleTypePurgatory"
 const returnDamage:number[] = [0, 0, 0, 0, 0, 0, 0, 0];
 const superbiaDamage:number[] = [0, 0, 0, 0, 0, 0, 0, 0];
 
-export function restartSuperbia(): void
+export function restart(): void
 {
     for (const player of getPlayers()) {
         const index = getPlayers().findIndex(p => p.Index === player.Index);
@@ -16,7 +16,7 @@ export function restartSuperbia(): void
     }
 }
 
-export function damageSuperbia(entity : Entity, flags : int): void
+export function entityTakeDamage(entity : Entity, flags : int): void
 {
     const player = entity.ToPlayer()
     if (player !== undefined && player.HasCollectible(CollectibleTypePurgatory.SUPERBIA) && ((flags & DamageFlag.NO_PENALTIES) !== DamageFlag.NO_PENALTIES))
@@ -32,7 +32,7 @@ export function damageSuperbia(entity : Entity, flags : int): void
     }
 }
 
-export function completeRoomSuperbia(): void
+export function completeRoom(): void
 {
     for (const player of getPlayers()) {
         if (player.HasCollectible(CollectibleTypePurgatory.SUPERBIA)) {
@@ -44,7 +44,7 @@ export function completeRoomSuperbia(): void
     }
 }
 
-export function newRoomSuperbia(): void
+export function newRoom(): void
 {
     for (const player of getPlayers()) {
         if (player.HasCollectible(CollectibleTypePurgatory.SUPERBIA)) {
@@ -53,7 +53,7 @@ export function newRoomSuperbia(): void
         }
     }
 }
-export function cacheSuperbia(player : EntityPlayer, flag : CacheFlag): void
+export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
 {
     if (player.HasCollectible(CollectibleTypePurgatory.SUPERBIA))
     {

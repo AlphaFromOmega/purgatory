@@ -1,7 +1,12 @@
-import { tearInitSprinklerHead } from "../items/sprinkler_head";
+import { ModCallback } from "isaac-typescript-definitions";
+import { ModUpgraded } from "isaacscript-common";
+import * as sprinklerHead from "../items/sprinkler_head";
 
+export function init(mod : ModUpgraded): void {
+    mod.AddCallback(ModCallback.POST_TEAR_INIT, main);
+}
 
-export function tearInit(tear : EntityTear): void
+export function main(tear : EntityTear): void
 {
-    tearInitSprinklerHead(tear)
+    sprinklerHead.tearInit(tear)
 }

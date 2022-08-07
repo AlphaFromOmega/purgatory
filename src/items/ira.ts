@@ -6,7 +6,7 @@ const iraBerserk = [0, 0, 0, 0, 0, 0, 0, 0];
 const delay = [0, 0, 0, 0, 0, 0, 0, 0];
 const berserk = [false, false, false, false, false, false, false, false];
 
-export function restartIra(): void
+export function restart(): void
 {
     for (const player of getPlayers()) {
         const index = getPlayers().findIndex(p => p.Index === player.Index);
@@ -18,7 +18,7 @@ export function restartIra(): void
     }
 }
 
-export function damageIra(entity : Entity): void
+export function entityTakeDamage(entity : Entity): void
 {
     const player = entity.ToPlayer()
     if (player !== undefined && player.HasCollectible(CollectibleTypePurgatory.IRA) )
@@ -33,7 +33,7 @@ export function damageIra(entity : Entity): void
     }
 }
 
-export function updateIra(): void
+export function update(): void
 {
     getPlayers().forEach(player => {
         const index = getPlayers().findIndex(p => p.Index === player.Index);
@@ -71,7 +71,7 @@ export function updateIra(): void
         }
     })
 }
-export function cacheIra(player : EntityPlayer, flag : CacheFlag): void
+export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
 {
     if (player.HasCollectible(CollectibleTypePurgatory.IRA))
     {

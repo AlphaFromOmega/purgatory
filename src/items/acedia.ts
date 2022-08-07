@@ -4,12 +4,12 @@ import "../enum/CollectibleTypePurgatory";
 
 const multi:number[] = [1, 1, 1, 1, 1, 1, 1, 1];
 
-export function newRoomAcedia(): void
+export function newRoom(): void
 {
     multiReset()
 }
 
-export function restartAcedia(): void
+export function restart(): void
 {
     multiReset()
 }
@@ -31,7 +31,7 @@ function multiReset()
     });
 }
 
-export function updateAcedia(): void
+export function update(): void
 {
     getPlayers().forEach(player => {
         const index = getPlayers().findIndex(p => p.Index === player.Index);
@@ -48,7 +48,7 @@ export function updateAcedia(): void
     });
 }
 
-export function cacheAcedia(player : EntityPlayer, flag : CacheFlag): void
+export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
 {
     if (player.HasCollectible(CollectibleTypePurgatory.ACEDIA))
     {

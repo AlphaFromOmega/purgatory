@@ -2,7 +2,7 @@ import { CacheFlag } from "isaac-typescript-definitions";
 import { getPlayers } from "isaacscript-common";
 import "../enum/CollectibleTypePurgatory";
 
-export function restartAvaritia(): void
+export function restart(): void
 {
     getPlayers().forEach(player => {
         const index = getPlayers().findIndex(p => p.Index === player.Index);
@@ -20,7 +20,7 @@ const lastCoins:number[] = [1, 1, 1, 1, 1, 1, 1, 1];
 const lastBombs:number[] = [1, 1, 1, 1, 1, 1, 1, 1];
 const lastKeys:number[] = [1, 1, 1, 1, 1, 1, 1, 1];
 
-export function updateAvaritia(): void
+export function update(): void
 {
     getPlayers().forEach(player => {
         if (player.HasCollectible(CollectibleTypePurgatory.AVARITIA))
@@ -53,7 +53,7 @@ export function updateAvaritia(): void
     });
 }
 
-export function cacheAvaritia(player : EntityPlayer, flag : CacheFlag): void
+export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
 {
     if (player.HasCollectible(CollectibleTypePurgatory.AVARITIA))
     {

@@ -2,7 +2,7 @@ import { CacheFlag, DamageFlag, TearFlag } from "isaac-typescript-definitions";
 import { bitFlags } from "isaacscript-common";
 import "../enum/CollectibleTypePurgatory";
 
-export function damageLuxuria(entity : Entity, source : EntityRef, damage : float, flags : BitFlags<DamageFlag>, countdown : float): boolean
+export function entityTakeDamage(entity : Entity, source : EntityRef, damage : float, flags : BitFlags<DamageFlag>, countdown : float): boolean
 {
     const e = source.Entity
     if (e !== undefined)
@@ -31,7 +31,7 @@ export function damageLuxuria(entity : Entity, source : EntityRef, damage : floa
     return true;
 }
 
-export function cacheLuxuria(player : EntityPlayer, flag : CacheFlag): void
+export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
 {
     if (player.HasCollectible(CollectibleTypePurgatory.LUXURIA))
     {

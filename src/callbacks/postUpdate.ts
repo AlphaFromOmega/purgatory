@@ -1,16 +1,22 @@
-import { updateAcedia } from "../items/acedia";
-import { updateAvaritia } from "../items/avaritia";
-import { updateGula } from "../items/gula";
-import { updateIra } from "../items/ira";
-import { updateMemoryLeak } from "../items/memory_leak";
-import { updateSprinklerHead } from "../items/sprinkler_head";
+import { ModCallback } from "isaac-typescript-definitions";
+import { ModUpgraded } from "isaacscript-common";
+import * as acedia from "../items/acedia";
+import * as avaritia from "../items/avaritia";
+import * as gula from "../items/gula";
+import * as ira from "../items/ira";
+import * as memoryLeak from "../items/memory_leak";
+import * as sprinklerHead from "../items/sprinkler_head";
 
-export function postUpdate(): void
+export function init(mod : ModUpgraded): void {
+    mod.AddCallback(ModCallback.POST_UPDATE, main);
+}
+
+export function main(): void
 {
-    updateIra();
-    updateAcedia();
-    updateAvaritia();
-    updateGula();
-    updateSprinklerHead();
-    updateMemoryLeak();
+    ira.update();
+    acedia.update();
+    avaritia.update();
+    gula.update();
+    sprinklerHead.update();
+    memoryLeak.update();
 }
