@@ -1,12 +1,12 @@
 import { DefaultMap, saveDataManager } from "isaacscript-common";
 
-export class PurgatoryData {
-  wakeMeUpDuplication = false;
+export class PurgatoryRunData {
+  tissueBoxDamageUp = 0;
 }
 
 export const v = {
   run: {
-    purgatoryData: new DefaultMap<PtrHash, PurgatoryData>(() => new PurgatoryData()),
+    purgatoryData: new DefaultMap<PtrHash, PurgatoryRunData>(() => new PurgatoryRunData()),
   },
 };
 

@@ -8,6 +8,7 @@ import * as invidia from "../items/invidia";
 import * as ira from "../items/ira";
 import * as sprinklerHead from "../items/sprinkler_head";
 import * as superbia from "../items/superbia";
+import * as tissueBox from "../items/tissue_box";
 
 export function init(mod : ModUpgraded): void {
     mod.AddCallback(ModCallback.EVALUATE_CACHE, main);
@@ -20,6 +21,7 @@ export function main(player : EntityPlayer, flag : CacheFlag): void
     ira.evaluateCache(player, flag);
     acedia.evaluateCache(player, flag);
     avaritia.evaluateCache(player, flag);
-    gula.evaluateCache(player, flag)
-    sprinklerHead.evaluateCache(player, flag)
+    gula.evaluateCache(player, flag);
+    sprinklerHead.evaluateCache(player, flag);
+    tissueBox.evaluateCache(player, flag);
 }

@@ -91,6 +91,7 @@
   />
   <passive
     name="Tissue Box"
+    cache="firedelay damage"
     description="For wiping your sorrows away"
     gfx="tissue_box.png"
     quality="3"

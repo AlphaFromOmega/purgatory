@@ -6,6 +6,7 @@ export function eid(): void{
         EID.addCollectible(CollectibleTypePurgatory.SPRINKLER_HEAD, "↑ x4 Fire Rate Up#Tears will be shot at 45 degree intervals.")
         EID.addCollectible(CollectibleTypePurgatory.MEMORY_LEAK, "{{Slow}} Permanent slow effect for enemies.#Spending more than 5 minutes on a floor causes Isaac to take damage.")
         EID.addCollectible(CollectibleTypePurgatory.WAKE_ME_UP, "Doubles all monster and collectible spawns.")
+        EID.addCollectible(CollectibleTypePurgatory.TISSUE_BOX, "↑ +20% damage#↓ +1 Tear Delay#Tears are capped at 3.50#All tears lost from the cap are added to damage instead.")
         EID.addCollectible(CollectibleTypePurgatory.SUPERBIA, "↑ +0.25 Damage per room cleared#↓ -0.25 Damage on hit#All damage ups are removed on hit.")
         EID.addCollectible(CollectibleTypePurgatory.INVIDIA, "↑ Shops sell items for free.#↓ Random stat down on picking up a pedestal item.#↓ Collectibles have a 25% chance of being stolen when entering a room")
         EID.addCollectible(CollectibleTypePurgatory.IRA, "25% chance on hit to become enraged#While enraged Isaac is invincible and deals additional contact damage#Can not fire tears while enraged or a small period after.")
