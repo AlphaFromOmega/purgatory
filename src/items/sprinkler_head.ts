@@ -80,7 +80,7 @@ export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
     {
         if ((flag & CacheFlag.FIRE_DELAY) === CacheFlag.FIRE_DELAY)
         {
-            player.MaxFireDelay /= 4;
+            player.MaxFireDelay /= 4 * player.GetCollectibleNum(CollectibleTypePurgatory.SPRINKLER_HEAD);
         }
     }
 }
