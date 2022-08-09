@@ -1,6 +1,5 @@
 import { EntityType } from "isaac-typescript-definitions";
-import { getNewRoomCandidate, getPickups, getPlayers, getRoomAdjacentGridIndexes, getRoomData, getRoomDescriptor, spawnNPC, spawnPickup } from "isaacscript-common";
-import { v } from "../dataManager";
+import { getPlayers, getRoomDescriptor, spawnNPC, spawnPickup } from "isaacscript-common";
 
 let recentlyEntered = false;
 

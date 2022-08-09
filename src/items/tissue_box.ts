@@ -1,4 +1,4 @@
-import { CacheFlag, CollectibleType } from "isaac-typescript-definitions";
+import { CacheFlag } from "isaac-typescript-definitions";
 import { getPlayers } from "isaacscript-common";
 
 let damageUp = 0;
@@ -29,7 +29,7 @@ export function update() : void
 {
     if (checkDamage)
     {
-        let player;
+        let player : EntityPlayer | undefined;
         for (const p of getPlayers())
         {
             if (p.HasCollectible(CollectibleTypePurgatory.TISSUE_BOX))
