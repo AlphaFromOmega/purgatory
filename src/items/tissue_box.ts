@@ -1,28 +1,33 @@
 import { CacheFlag } from "isaac-typescript-definitions";
 import { getPlayers } from "isaacscript-common";
+import { v } from "../dataManager";
 
-let damageUp = 0;
+const damageUp = 0;
 let checkDamage = false;
 
 const tearCap = 3.5
 
 export function evaluateCache(player : EntityPlayer, flag : CacheFlag) : void
 {
-  if (player.HasCollectible(CollectibleTypePurgatory.TISSUE_BOX))
-  {
-      if ((flag & CacheFlag.DAMAGE) === CacheFlag.DAMAGE)
-      {
-          player.Damage += damageUp;
-          player.Damage *= 1.2;
-      }
-      if ((flag & CacheFlag.FIRE_DELAY) === CacheFlag.FIRE_DELAY)
-      {
-          damageUp = math.max((30/(player.MaxFireDelay + 1) - tearCap), 0);
-          Isaac.ConsoleOutput(`${damageUp}`)
-          player.MaxFireDelay = math.max(player.MaxFireDelay + 1, (30/tearCap - 1));
-          checkDamage = true;
-      }
-  }
+    if (player.HasCollectible(CollectibleTypePurgatory.TISSUE_BOX))
+    {
+        if ((flag & CacheFlag.FIRE_DELAY) === CacheFlag.FIRE_DELAY)
+        {
+            const ptrHash = GetPtrHash(player)
+            const data = v.run.purgatoryData.getAndSetDefault(ptrHash);
+            data.tissueBoxDamageUp = math.max((30/(player.MaxFireDelay + 1) - tearCap), 0);
+            Isaac.ConsoleOutput(`${damageUp}`)
+            player.MaxFireDelay = math.max(player.MaxFireDelay + 1, (30/tearCap - 1));
+            checkDamage = true;
+        }
+        if ((flag & CacheFlag.DAMAGE) === CacheFlag.DAMAGE)
+        {
+            const ptrHash = GetPtrHash(player)
+            const data = v.run.purgatoryData.getAndSetDefault(ptrHash);
+            player.Damage += data.tissueBoxDamageUp;
+            player.Damage *= 1.2;
+        }
+    }
 }
 
 export function update() : void

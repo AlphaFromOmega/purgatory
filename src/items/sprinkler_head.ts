@@ -1,10 +1,7 @@
 import { CacheFlag, CollectibleType, EntityType} from "isaac-typescript-definitions";
 import { FamiliarVariant, LaserVariant } from "isaac-typescript-definitions/dist/enums/collections/variants";
-import { getFamiliars } from "isaacscript-common";
-
-let rotateAmount = 0;
-
-let shotCooldown = 0;
+import { getFamiliars, getPlayers } from "isaacscript-common";
+import { v } from "../dataManager";
 
 export function tearInit(tear : EntityTear): void
 {
@@ -13,10 +10,12 @@ export function tearInit(tear : EntityTear): void
         const player = tear.SpawnerEntity?.ToPlayer();
         if (player !== undefined && player.FireDelay >= player.MaxFireDelay - 0.5 && player.HasCollectible(CollectibleTypePurgatory.SPRINKLER_HEAD))
         {
-            if (shotCooldown <= 0)
+            const ptrHash = GetPtrHash(player)
+            const data = v.run.purgatoryData.getAndSetDefault(ptrHash);
+            if (data.sprinklerHeadShotCooldown <= 0)
             {
-                rotateAmount = (rotateAmount + 1) % 8;
-                shotCooldown = player.FireDelay - 0.5;
+                data.sprinklerHeadRotation = (data.sprinklerHeadRotation + 1) % 8;
+                data.sprinklerHeadShotCooldown = player.FireDelay - 0.5;
             }
             const nVel = tear.Velocity;
             const nDir = player.GetShootingInput();
@@ -25,7 +24,7 @@ export function tearInit(tear : EntityTear): void
             nDir.Normalize();
             const angleOffset = nVel.GetAngleDegrees() - nDir.GetAngleDegrees();
 
-            tear.Velocity = Vector(player.ShotSpeed * 8, 0).Rotated((rotateAmount * 45) + angleOffset);
+            tear.Velocity = Vector(player.ShotSpeed * 8, 0).Rotated((data.sprinklerHeadRotation * 45) + angleOffset);
             if (player.HasCollectible(CollectibleType.GUILLOTINE))
             {
                 getFamiliars(FamiliarVariant.GUILLOTINE).forEach(f => {
@@ -48,10 +47,12 @@ export function laserInit(laser : EntityLaser): void
     const p = laser.SpawnerEntity?.ToPlayer();
     if (p !== undefined && p.HasCollectible(CollectibleTypePurgatory.SPRINKLER_HEAD) && (laser.Position.sub(p.Position).Length() < 32) && laser.Variant !== LaserVariant.ELECTRIC)
     {
-        if (shotCooldown <= 0)
+        const ptrHash = GetPtrHash(p)
+        const data = v.run.purgatoryData.getAndSetDefault(ptrHash);
+        if (data.sprinklerHeadShotCooldown <= 0)
         {
-            rotateAmount = (rotateAmount + 1) % 8;
-            shotCooldown = 1;
+            data.sprinklerHeadRotation = (data.sprinklerHeadRotation + 1) % 8;
+            data.sprinklerHeadShotCooldown = 1;
         }
         if (laser.IsCircleLaser())
         {
@@ -61,7 +62,7 @@ export function laserInit(laser : EntityLaser): void
             nVel.Normalize();
             nDir.Normalize();
             const angleOffset = nVel.GetAngleDegrees() - nDir.GetAngleDegrees();
-            laser.Velocity = Vector(laser.Velocity.Length(), 0).Rotated(rotateAmount * 45 + angleOffset);
+            laser.Velocity = Vector(laser.Velocity.Length(), 0).Rotated(data.sprinklerHeadRotation * 45 + angleOffset);
         }
         else
         {
@@ -69,7 +70,7 @@ export function laserInit(laser : EntityLaser): void
 
             nDir.Normalize();
             const angleOffset = laser.RotationDegrees - nDir.GetAngleDegrees();
-            laser.SetActiveRotation(0, rotateAmount * 45 + angleOffset + nDir.GetAngleDegrees(), 2000, true);
+            laser.SetActiveRotation(0, data.sprinklerHeadRotation * 45 + angleOffset + nDir.GetAngleDegrees(), 2000, true);
         }
     }
 }
@@ -86,5 +87,10 @@ export function evaluateCache(player : EntityPlayer, flag : CacheFlag): void
 }
 export function update(): void
 {
-    shotCooldown = math.max(shotCooldown - 1, 0);
+    for (const player of getPlayers())
+    {
+        const ptrHash = GetPtrHash(player);
+        const data = v.run.purgatoryData.getAndSetDefault(ptrHash);
+        data.sprinklerHeadShotCooldown = math.max(data.sprinklerHeadShotCooldown - 1, 0);
+    }
 }

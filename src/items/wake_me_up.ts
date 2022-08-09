@@ -1,9 +1,11 @@
-import { EntityType } from "isaac-typescript-definitions";
+import { EntityFlag, EntityType, PickupVariant } from "isaac-typescript-definitions";
 import { getPlayers, getRoomDescriptor, spawnNPC, spawnPickup } from "isaacscript-common";
 
 let recentlyEntered = false;
 
-const blacklistedNPCs = [EntityType.POOP, EntityType.FIREPLACE]
+const blacklistedSpawners = [EntityType.PLAYER]
+const blacklistedNPCs = [EntityType.POOP, EntityType.FIREPLACE, EntityType.DUMMY, EntityType.GENERIC_PROP]
+const blacklistedPickups = [PickupVariant.BED, PickupVariant.MOMS_CHEST]
 
 export function postNPCInitLate(npc : EntityNPC) : void
 {
@@ -19,6 +21,13 @@ export function postNPCInitLate(npc : EntityNPC) : void
 
     if (hasWakeMeUp && (!recentlyEntered || getRoomDescriptor().VisitedCount <= 1) && npc.SpawnerEntity?.Type !== npc.Type && npc.SpawnerEntity?.Variant !== npc.Variant && npc.SpawnerEntity?.SubType !== npc.SubType)
     {
+        for (const i of blacklistedSpawners)
+        {
+            if (i === npc.SpawnerType)
+            {
+                return;
+            }
+        }
         for (const i of blacklistedNPCs)
         {
             if (i === npc.Type)
@@ -50,10 +59,30 @@ export function postPickupInitLate(pickup : EntityPickup) : void
 
     if (hasWakeMeUp && (!recentlyEntered || getRoomDescriptor().VisitedCount <= 1)  && pickup.SpawnerEntity?.Type !== pickup.Type && pickup.SpawnerEntity?.Variant !== pickup.Variant && pickup.SpawnerEntity?.SubType !== pickup.SubType)
     {
+        for (const i of blacklistedSpawners)
+        {
+            if (i === pickup.SpawnerType)
+            {
+                return;
+            }
+        }
+        for (const i of blacklistedPickups)
+        {
+            if (i === pickup.Variant)
+            {
+                return;
+            }
+        }
+        if (pickup.IsShopItem())
+        {
+            return;
+        }
         const pickup2 = spawnPickup(pickup.Variant, pickup.SubType, pickup.Position.add(Vector(8, -8)), pickup.Velocity, pickup);
         pickup.Position = pickup.Position.add(Vector(-8, 8));
+        pickup.ClearEntityFlags(EntityFlag.ITEM_SHOULD_DUPLICATE)
         pickup.SetColor(Color(1, 0, 0), 216000, 1);
         pickup2.SetColor(Color(0, 0, 1), 216000, 1);
+        pickup2.AddEntityFlags(pickup.GetEntityFlags());
     }
 }
 
