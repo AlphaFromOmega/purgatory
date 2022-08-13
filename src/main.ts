@@ -13,6 +13,8 @@ import * as postNpcSpawn  from "./callbacks/postNpcSpawn";
 import * as preRoomReward  from "./callbacks/preRoomReward";
 import * as tearInit  from "./callbacks/tearInit";
 import * as postPickupSpawn  from "./callbacks/postPickupSpawn";
+import * as getShaderParameters  from "./callbacks/getShaderParameters";
+import * as postUseItem  from "./callbacks/postUseItem";
 import { eid } from "./eid";
 import { purgatoryDataInit } from "./dataManager";
 
@@ -38,6 +40,8 @@ export function main(): void {
     preRoomReward.init(umod);
     tearInit.init(umod);
     postPickupSpawn.init(umod);
+    postUseItem.init(umod);
+    getShaderParameters.init(umod);
 
 
     Isaac.DebugString(`${MOD_NAME} initialized.`);

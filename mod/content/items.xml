@@ -13,79 +13,86 @@
     quality="2"
   />
   <active
-    name="Loaded D1"
+    name="Weighted D1"
     description="Ad Infinitum"
-    gfx="loaded_d1.png"
+    gfx="weighted_d1.png"
     quality="3"
     maxcharges="4"
   />
   <active
-    name="Loaded D4"
+    name="Weighted D4"
     description="Merge and Profit"
-    gfx="loaded_d4.png"
+    gfx="weighted_d4.png"
     maxcharges="6"
     quality="3"
   />
   <active
-    name="Loaded D6"
+    name="Weighted D6"
     description="Solidify your destiny"
-    gfx="loaded_d6.png"
+    gfx="weighted_d6.png"
     quality="4"
     maxcharges="6"
   />
   <active
-    name="Loaded Eternal D6"
-    gfx="loaded_eternal_d6.png"
+    name="Weighted Eternal D6"
+    gfx="weighted_eternal_d6.png"
     description="Sunk Cost"
     maxcharges="2"
     quality="3"
   />
   <active
-    name="Loaded D7"
+    name="Weighted D7"
     description="Lying to Lady Luck"
-    gfx="loaded_d7.png"
+    gfx="weighted_d7.png"
     maxcharges="3"
     quality="3"
   />
   <active
-    name="Loaded D8"
+    name="Weighted D8"
     description="Improvement comes with sacrifice"
-    gfx="loaded_d8.png"
+    gfx="weighted_d8.png"
     maxcharges="4"
     quality="3"
   />
   <active
-    name="Loaded D10"
+    name="Weighted D10"
     description="Weaken the Many"
-    gfx="loaded_d10.png"
+    gfx="weighted_d10.png"
     maxcharges="2"
     quality="3"
   />
   <active
-    name="Loaded D12"
+    name="Weighted D12"
     description="Topple the King"
-    gfx="loaded_d12.png"
+    gfx="weighted_d12.png"
     maxcharges="3"
     quality="2"
   />
   <active
-    name="Loaded D100"
-    description="You've met with a terrible fate, haven't you?"
-    gfx="loaded_d100.png"
+    name="Weighted D20"
+    description="Ya betta' believe this dice is loaded"
+    gfx="weighted_d20.png"
     maxcharges="6"
     quality="3"
   />
   <active
-    name="Loaded Spindown Dice"
-    description="min(4, quality)"
-    gfx="loaded_spindown_dice.png"
+    name="Weighted D100"
+    description="You've met with a terrible fate, haven't you?"
+    gfx="weighted_d100.png"
+    maxcharges="6"
+    quality="3"
+  />
+  <active
+    name="Weighted Spindown Dice"
+    description="max(4, quality)"
+    gfx="weighted_spindown_dice.png"
     maxcharges="6"
     quality="4"
   />
   <active
     name="Speak 'n' Spell"
     description="Heaven Says"
-    gfx="loaded_spindown_dice.png"
+    gfx="weighted_spindown_dice.png"
     maxcharges="4"
     quality="2"
   />
@@ -143,6 +150,62 @@
     name="Luxuria"
     description="Endear the Enemy"
     cache="tearflag"
+    gfx="luxuria.png"
+    quality="3"
+  />
+
+
+  <passive
+    name="Atelophobia"
+    description="My mistakes are my own"
+    gfx="luxuria.png"
+    quality="3"
+  />
+  <passive
+    name="Technophobia"
+    description="Replacable with a machine"
+    gfx="luxuria.png"
+    quality="3"
+  />
+  <passive
+    name="Arachnophobia"
+    description="Eight-Legged Freaks"
+    gfx="luxuria.png"
+    quality="3"
+  />
+  <passive
+    name="Hexakosioihexekontahexaphobia"
+    description="I am a beast"
+    gfx="luxuria.png"
+    quality="3"
+  />
+  <passive
+    name="Belonephobia"
+    description="The jab"
+    gfx="luxuria.png"
+    quality="3"
+  />
+  <passive
+    name="Aquaphobia"
+    description="I can't swim"
+    gfx="luxuria.png"
+    quality="3"
+  />
+  <passive
+    name="Ommetaphobia"
+    description="They're Watching"
+    gfx="luxuria.png"
+    quality="3"
+  />
+  <passive
+    name="Neophobia"
+    description="Faltering progession"
+    gfx="luxuria.png"
+    quality="3"
+  />
+  <passive
+    name="Haemophobia"
+    description="The blood is making me sick"
     gfx="luxuria.png"
     quality="3"
   />
