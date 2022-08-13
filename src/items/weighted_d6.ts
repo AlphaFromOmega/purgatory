@@ -14,11 +14,11 @@ export function postUseItem(type : CollectibleType, seed : RNG,  player : Entity
         if (collectibles.length > 0 && data.weightedD6RoomIgnore < 0)
         {
             data.weightedD6RoomIgnore = getRoomGridIndex();
+            const dupe = player.HasCollectible(CollectibleType.CAR_BATTERY);
             for (const c of collectibles)
             {
                 const pickup2 = spawnPickup(c.Variant, c.SubType, c.Position.add(Vector(40, 0)), c.Velocity, c);
                 pickup2.AddEntityFlags(c.GetEntityFlags());
-                const dupe = player.HasCollectible(CollectibleType.CAR_BATTERY);
                 if (dupe)
                 {
                     const pickup3 = spawnPickup(c.Variant, c.SubType, c.Position, c.Velocity, c);

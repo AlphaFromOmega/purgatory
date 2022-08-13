@@ -51,12 +51,5 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.tabSize": 2
-  },
-  "prettier.printWidth": 1000,
-  "prettier.tabWidth": 4,
-  "prettier.enable": false,
-  "cSpell.words": [
-    "CollectibleTypePurgatory.LUXURIA",
-    "Luxuria"
-  ]
+  }
 }
