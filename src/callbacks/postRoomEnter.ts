@@ -4,6 +4,7 @@ import * as acedia from "../items/acedia";
 import * as invidia from "../items/invidia";
 import * as superbia from "../items/superbia";
 import * as wakeMeUp from "../items/wake_me_up";
+import * as weightedD7 from "../items/weighted_d7";
 
 export function init(mod : ModUpgraded): void {
     mod.AddCallback(ModCallback.POST_NEW_ROOM, main);
@@ -15,4 +16,5 @@ export function main(): void
     invidia.newRoom();
     acedia.newRoom();
     wakeMeUp.newRoom();
+    weightedD7.newRoom();
 }
