@@ -1,5 +1,5 @@
 import { ActiveSlot, CollectibleType, EntityFlag, ItemConfigTag, UseFlag } from "isaac-typescript-definitions";
-import { colorEquals, getCollectibles, getPlayers, getRoomGridIndex, spawnPickup } from "isaacscript-common";
+import { colorEquals, findFreePosition, getCollectibles, getPlayers, getRoomGridIndex, spawnPickup } from "isaacscript-common";
 import { v } from "../dataManager";
 
 export function postUseItem(type : CollectibleType, seed : RNG,  player : EntityPlayer, flags : UseFlag, activeSlot : ActiveSlot, customVarData : int): boolean | { Discharge: boolean; Remove: boolean; ShowAnim: boolean; } | undefined
@@ -17,14 +17,14 @@ export function postUseItem(type : CollectibleType, seed : RNG,  player : Entity
             const dupe = player.HasCollectible(CollectibleType.CAR_BATTERY);
             for (const c of collectibles)
             {
-                const pickup2 = spawnPickup(c.Variant, c.SubType, c.Position.add(Vector(40, 0)), c.Velocity, c);
+                const pickup2 = spawnPickup(c.Variant, c.SubType, findFreePosition(c.Position.add(Vector(40, 0))), c.Velocity, c);
                 pickup2.AddEntityFlags(c.GetEntityFlags());
                 if (dupe)
                 {
                     const pickup3 = spawnPickup(c.Variant, c.SubType, c.Position, c.Velocity, c);
                     pickup3.AddEntityFlags(c.GetEntityFlags());
                 }
-                c.Position = c.Position.add(Vector(-40, 0));
+                c.Position = findFreePosition(c.Position.add(Vector(-40, 0)));
                 c.TargetPosition = c.Position;
             }
             return {Discharge : true, Remove : false, ShowAnim : true};

@@ -7,7 +7,7 @@ export function eid(): void{
         EID.addCollectible(CollectibleTypePurgatory.MEMORY_LEAK, "{{Slow}} Permanent slow effect for enemies.#Spending more than 5 minutes on a floor causes Isaac to take damage.")
 
         EID.addCollectible(CollectibleTypePurgatory.WEIGHTED_D1, "Duplicates a random pickup in the room.#All other pickups in the room are deleted.")
-        EID.addCollectible(CollectibleTypePurgatory.WEIGHTED_D4, "Rerolls all items on Isaac.#Rerolls are more likely to be a higher quality.#If a rerolled item has a quality less than the average item quality it will be removed.")
+        EID.addCollectible(CollectibleTypePurgatory.WEIGHTED_D4, "Rerolls all items on Isaac ignoring the item pools they are from.#Items will be rerolled up to 3 times while they are below the average item quality.#If the item is still below the average quality it will be discarded.")
         EID.addCollectible(CollectibleTypePurgatory.WEIGHTED_D6, "Duplicates all items within a room.#All other items for the rest of the floor are removed.#Story items will not be removed.")
         EID.addCollectible(CollectibleTypePurgatory.WEIGHTED_D7, "Restarts the room with the chance of getting 1-4 pickups.#The rooms enemies will be randomised.")
         EID.addCollectible(CollectibleTypePurgatory.WEIGHTED_D8, "Random stats ups on damage, tears, range and speed.#Grants a broken heart on use.")

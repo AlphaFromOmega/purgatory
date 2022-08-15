@@ -1,5 +1,5 @@
 import { ActiveSlot, CollectibleType, PickupVariant, UseFlag } from "isaac-typescript-definitions";
-import { getPickups, getRandomInt, spawnPickup } from "isaacscript-common";
+import { findFreePosition, getPickups, getRandomInt, spawnPickup } from "isaacscript-common";
 
 const blacklistedPickups = [PickupVariant.BED, PickupVariant.MOMS_CHEST, PickupVariant.COLLECTIBLE]
 
@@ -21,10 +21,10 @@ export function postUseItem(type : CollectibleType, seed : RNG, player : EntityP
             }
             if (chosenPickup !== undefined)
             {
-                spawnPickup(chosenPickup.Variant, chosenPickup.SubType, chosenPickup.Position);
+                spawnPickup(chosenPickup.Variant, chosenPickup.SubType, findFreePosition(chosenPickup.Position));
                 if (player.HasCollectible(CollectibleType.CAR_BATTERY))
                 {
-                    spawnPickup(chosenPickup.Variant, chosenPickup.SubType, chosenPickup.Position);
+                    spawnPickup(chosenPickup.Variant, chosenPickup.SubType, findFreePosition(chosenPickup.Position));
                 }
             }
             return {Discharge : true, Remove : false, ShowAnim : true};
