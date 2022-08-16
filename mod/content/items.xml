@@ -58,7 +58,7 @@
     name="Weighted D10"
     description="Weaken the Many"
     gfx="weighted_d10.png"
-    maxcharges="2"
+    maxcharges="1"
     quality="3"
   />
   <active
